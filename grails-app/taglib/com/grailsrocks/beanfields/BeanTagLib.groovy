@@ -19,7 +19,7 @@ package com.grailsrocks.beanfields
 import org.springframework.web.servlet.support.RequestContextUtils as RCU
 import org.springframework.context.MessageSourceResolvable
 import org.springframework.validation.Errors
-import org.codehaus.groovy.grails.commons.ApplicationHolder
+import grails.util.Holders
 import org.codehaus.groovy.grails.commons.GrailsClassUtils
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 
@@ -936,7 +936,7 @@ class BeanTagLib {
 
         def bean = pageScope.variables[name]
         if (bean == null) {
-            bean = ApplicationHolder.application.classLoader.loadClass(cls).newInstance()
+            bean = Holders.grailsApplication.classLoader.loadClass(cls).newInstance()
             pageScope[name] = bean
         }
     }
@@ -984,7 +984,7 @@ class BeanTagLib {
 		// If still not resolved to an instance, see if we can create it
 	    def cls = attrs.remove('className')
 		if (!attrs._BEAN.bean && cls) {
-		    attrs._BEAN.bean = ApplicationHolder.application.classLoader.loadClass(cls).newInstance()
+		    attrs._BEAN.bean = Holders.grailsApplication.classLoader.loadClass(cls).newInstance()
 		}
 
 		if (attrs._BEAN.bean) {

@@ -1,28 +1,16 @@
 
-grails.project.class.dir = "target/classes"
-grails.project.test.class.dir = "target/test-classes"
-grails.project.test.reports.dir = "target/test-reports"
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+grails.project.work.dir = "target"
+grails.project.fork = false
 
+grails.project.dependency.resolver = "maven"
 grails.project.dependency.resolution = {
-    // inherit Grails' default dependencies
-    inherits("global") {
-        // uncomment to disable ehcache
-        // excludes 'ehcache'
-        excludes "xml-apis", "xerces"
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+
+    inherits("global")
+
     repositories {
-        grailsPlugins()
-        grailsHome()
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenCentral()
-        //mavenLocal()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        grailsCentral()
+        mavenLocal()
+        mavenCentral()
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -31,9 +19,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        build(":tomcat:$grailsVersion",
-              ":hibernate:$grailsVersion",
-              ':release:2.0.2') {
+        build ":tomcat:7.0.52.1", ":hibernate:3.6.10.14", ':release:3.0.1', ':rest-client-builder:1.0.3', {
             export = false
         }
     }
